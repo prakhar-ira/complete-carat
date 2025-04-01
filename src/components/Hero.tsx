@@ -132,7 +132,7 @@ const Hero: React.FC = () => {
             className="flex justify-center mt-12"
           >
             <div className="w-[270px] h-[40px] flex items-center space-x-2">
-              <span className="text-[#FDF0D5] text-sm">Get Started</span>
+              <span className="text-[#FDF0D5] text-sm">See Our Work</span>
               <span className="text-[#FDF0D5] text-sm">|</span>
               <div className="flex space-x-2">
                 {/* Instagram Icon */}
