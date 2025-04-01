@@ -1,8 +1,9 @@
 "use client";
 
 import React, { useState } from "react";
-
 import Image from "next/image";
+import emailjs from "@emailjs/browser";
+import Modal from "./Modal";
 
 interface FormSectionProps {
   number: number;
@@ -141,6 +142,8 @@ const DiamondBuilder: React.FC = () => {
     additionalComments: "",
   });
 
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
@@ -181,6 +184,39 @@ const DiamondBuilder: React.FC = () => {
     "Radiant",
   ];
   const colors = ["D", "E", "F", "G", "H", "I", "J"];
+
+  const handleSubmit = async () => {
+    if (isFormValid()) {
+      try {
+        const templateParams = {
+          from_name: formData.name,
+          from_email: formData.email,
+          phone: formData.phone || "Not provided",
+          shape: formData.shape,
+          carat: formData.carat,
+          color: formData.color,
+          message: formData.additionalComments || "None",
+        };
+
+        await emailjs.send(
+          process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
+          process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!,
+          templateParams,
+          process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!
+        );
+
+        // Show success modal instead of immediate redirect
+        setIsModalOpen(true);
+      } catch (error) {
+        console.error("Error:", error);
+        alert("Failed to send form data. Please try again.");
+      }
+    }
+  };
+
+  const handleProceedToSchedule = () => {
+    window.location.href = process.env.NEXT_PUBLIC_CALENDLY_URL!;
+  };
 
   return (
     <div className="relative min-h-screen flex items-center justify-center">
@@ -374,7 +410,7 @@ const DiamondBuilder: React.FC = () => {
               Our expert will reach out to you via phone in next 24-48 hours
             </p>
             <button
-              onClick={() => {}}
+              onClick={handleSubmit}
               disabled={!isFormValid()}
               className={`w-full p-4 rounded-lg text-center transition-all duration-200 ${
                 isFormValid()
@@ -393,6 +429,13 @@ const DiamondBuilder: React.FC = () => {
           </div>
         </div>
       </div>
+
+      {/* Add Modal */}
+      <Modal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        onProceed={handleProceedToSchedule}
+      />
     </div>
   );
 };

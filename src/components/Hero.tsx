@@ -38,6 +38,22 @@ const Hero: React.FC = () => {
 
   return (
     <div ref={containerRef} className="h-[180vh] relative">
+      {/* Background Image - Hidden on mobile */}
+      <div className="fixed inset-0 -z-10">
+        <div className="absolute inset-0">
+          <Image
+            src="/background.jpg"
+            alt="Background"
+            fill
+            style={{ objectFit: "cover" }}
+            priority
+            quality={100}
+            sizes="100vw"
+          />
+          <div className="absolute inset-0 bg-black/60" />
+        </div>
+      </div>
+
       <motion.section
         animate={{
           height: isScrollComplete ? "auto" : "115vh",
@@ -58,7 +74,7 @@ const Hero: React.FC = () => {
               <div className="h-px bg-white flex-1"></div>
               <div className="text-white text-2xl">★</div>
               <div className="text-center px-4">
-                <h1 className="text-[44px] font-['SF_Pro_Display'] font-thin text-center uppercase tracking-wide leading-[34.8px] bg-gradient-to-r from-white to-[#FDF0D5] text-transparent bg-clip-text [text-shadow:_-4.8px_-1.6px_12.8px_#E7CDB9,_4.8px_1.6px_12.8px_#FDF0D580]">
+                <h1 className="text-[44px] font-['SF_Pro_Display'] font-thin text-center uppercase tracking-wide bg-gradient-to-r from-white to-[#FDF0D5] text-transparent bg-clip-text [text-shadow:_-4.8px_-1.6px_12.8px_#E7CDB9,_4.8px_1.6px_12.8px_#FDF0D580] sm:leading-relaxed ">
                   DESIGN YOUR PERFECT DIAMOND
                 </h1>
               </div>
@@ -71,7 +87,7 @@ const Hero: React.FC = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.8, delay: 0.4 }}
-              className="text-[#FDF0D5] text-xl text-center font-light max-w-2xl"
+              className="text-[#FDF0D5] text-xl text-center font-light max-w-2xl leading-relaxed"
             >
               Craft your dream with our experts– a bespoke experience tailored
               to your engagement ring needs
