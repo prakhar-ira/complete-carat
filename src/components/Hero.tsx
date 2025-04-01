@@ -2,10 +2,10 @@
 
 import React, { useEffect, useRef, useState } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { useRouter } from "next/navigation";
 
 import Footer from "./Footer";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 const Hero: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -103,7 +103,8 @@ const Hero: React.FC = () => {
           >
             <button
               onClick={handleBookAppointment}
-              className="cursor-pointer bg-white text-[#01648E] border border-[#F7F0D5]/30 rounded-none py-3 px-3 flex items-center space-x-2 w-64 justify-center hover:bg-[#F9F9F0] transition-colors duration-300 cta_box_shadow"
+              className="cursor-pointer bg-white text-[#01648E] border border-[#F7F0D5]/30 rounded-none py-3 px-3 flex items-center space-x-2 w-64 justify-center hover:bg-[#F9F9F0] transition-colors duration-300 cta
+              ox_shadow"
             >
               <span className="text-lg font-medium">TALK TO OUR EXPERTS</span>
               <svg
@@ -137,6 +138,7 @@ const Hero: React.FC = () => {
                 {/* Instagram Icon */}
                 <a
                   href="https://www.instagram.com/completecarat/"
+                  target="_blank"
                   className="w-10 h-10 rounded-full border border-[#FDF0D5] flex items-center justify-center"
                 >
                   <Image
@@ -149,6 +151,7 @@ const Hero: React.FC = () => {
                 {/* Google Icon */}
                 <a
                   href="https://www.google.com/maps/place/Complete+Carat/@40.7574844,-73.9828387,17z/data=!4m8!3m7!1s0x883b4b7804cad1dd:0x70ee511590d1d9dc!8m2!3d40.7574804!4d-73.9802638!9m1!1b1!16s%2Fg%2F11vsw3l9jh?entry=ttu&g_ep=EgoyMDI0MTIwMS4xIKXMDSoASAFQAw%3D%3D"
+                  target="_blank"
                   className="w-10 h-10 rounded-full border border-[#F7F0D5] flex items-center justify-center"
                 >
                   <Image
@@ -161,6 +164,7 @@ const Hero: React.FC = () => {
                 {/* Trustpilot Icon */}
                 <a
                   href="https://www.trustpilot.com/review/completecarat.com?utm_medium=trustbox&utm_source=TrustBoxReviewCollector"
+                  target="_blank"
                   className="w-10 h-10 rounded-full border border-[#F7F0D5] flex items-center justify-center"
                 >
                   <Image
@@ -182,7 +186,7 @@ const Hero: React.FC = () => {
           opacity: footerOpacity,
           y: footerY,
         }}
-        className="w-full my-32"
+        className="w-full mt-60"
       >
         <Footer />
       </motion.div>

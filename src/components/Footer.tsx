@@ -5,7 +5,7 @@ import React from "react";
 
 const Footer: React.FC = () => {
   return (
-    <footer className="w-full mb-32">
+    <footer className="w-full mb-4">
       <div className="container mx-auto px-4">
         {/* First Row */}
         <div className="flex flex-col md:flex-row gap-[60px] mb-[12px]">
@@ -27,7 +27,7 @@ const Footer: React.FC = () => {
                   Ethically Sourced Diamonds
                 </h3>
               </div>
-              <p className="text-white text-base leading-relaxed mt-4 max-w-[634.45px] shadow-[0px_10px_10px_0px_rgba(0,0,0,0.04),0px_20px_25px_0px_rgba(0,0,0,0.1)]">
+              <p className="text-white text-base leading-relaxed mt-4 max-w-[634.45px] drop-shadow-[0px_10px_10px_0px_rgba(0,0,0,0.04)]">
                 Our GIA-certified natural and lab-grown diamonds are responsibly
                 mined, 100% conflict-free, and fully traceable. We ensure
                 ethical diamond sourcing without compromising the exceptional
@@ -55,7 +55,7 @@ const Footer: React.FC = () => {
                   Expertly Cut for Maximum Brilliance
                 </h3>
               </div>
-              <p className="text-white text-base leading-relaxed mt-4 max-w-[628.19px] shadow-[0px_10px_10px_0px_rgba(0,0,0,0.04),0px_20px_25px_0px_rgba(0,0,0,0.1)]">
+              <p className="text-white text-base leading-relaxed mt-4 max-w-[628.19px] drop-shadow-[0px_10px_10px_0px_rgba(0,0,0,0.04)]">
                 Each engagement ring features a precision ideal-cut diamond with
                 perfect proportions, maximizing brilliance, fire and
                 scintillation. Our master cutters create stones with superior
@@ -86,7 +86,7 @@ const Footer: React.FC = () => {
                   Custom Engagement Ring Design
                 </h3>
               </div>
-              <p className="text-white text-base leading-relaxed mt-4 max-w-[642.73px] shadow-[0px_10px_10px_0px_rgba(0,0,0,0.04),0px_20px_25px_0px_rgba(0,0,0,0.1)]">
+              <p className="text-white text-base leading-relaxed mt-4 max-w-[642.73px] drop-shadow-[0px_10px_10px_0px_rgba(0,0,0,0.04)]">
                 Design a bespoke diamond ring that tells your unique love story.
                 Choose from popular diamond shapes, various carat weights, and
                 premium metals including platinum and gold to create a
@@ -114,7 +114,7 @@ const Footer: React.FC = () => {
                   Lifetime Warranty & Authenticity Guarantee
                 </h3>
               </div>
-              <p className="text-white text-base leading-relaxed mt-4 max-w-[607.39px] shadow-[0px_10px_10px_0px_rgba(0,0,0,0.04),0px_20px_25px_0px_rgba(0,0,0,0.1)]">
+              <p className="text-white text-base leading-relaxed mt-4 max-w-[607.39px] drop-shadow-[0px_10px_10px_0px_rgba(0,0,0,0.04)]">
                 Every handcrafted diamond ring includes a lifetime craftsmanship
                 warranty and certified diamond authenticity documentation. GIA
                 certification ensures lasting value and investment-grade diamond

@@ -1,9 +1,10 @@
 "use client";
 
 import React, { useState } from "react";
+
 import Image from "next/image";
-import emailjs from "@emailjs/browser";
 import Modal from "./Modal";
+import emailjs from "@emailjs/browser";
 
 interface FormSectionProps {
   number: number;
@@ -139,6 +140,7 @@ const DiamondBuilder: React.FC = () => {
     shape: "",
     carat: "0",
     color: "",
+    clarity: "",
     additionalComments: "",
   });
 
@@ -155,10 +157,14 @@ const DiamondBuilder: React.FC = () => {
   };
 
   const handleOptionClick = (field: string, value: string) => {
-    setFormData((prev) => ({
-      ...prev,
-      [field]: value,
-    }));
+    setFormData((prev) => {
+      // Type assertion to allow string indexing
+      const typedPrev = prev as { [key: string]: string };
+      return {
+        ...prev,
+        [field]: typedPrev[field] === value ? "" : value,
+      };
+    });
   };
 
   const isValidEmail = (email: string) => {
@@ -184,6 +190,7 @@ const DiamondBuilder: React.FC = () => {
     "Radiant",
   ];
   const colors = ["D", "E", "F", "G", "H", "I", "J"];
+  const clarities = ["FL", "IF", "VVS1", "VVS2", "VS1", "VS2", "SI1", "SI2"];
 
   const handleSubmit = async () => {
     if (isFormValid()) {
@@ -195,6 +202,7 @@ const DiamondBuilder: React.FC = () => {
           shape: formData.shape,
           carat: formData.carat,
           color: formData.color,
+          clarity: formData.clarity,
           message: formData.additionalComments || "None",
         };
 
@@ -215,7 +223,7 @@ const DiamondBuilder: React.FC = () => {
   };
 
   const handleProceedToSchedule = () => {
-    window.location.href = process.env.NEXT_PUBLIC_CALENDLY_URL!;
+    window.open(process.env.NEXT_PUBLIC_CALENDLY_URL!, "_blank");
   };
 
   return (
@@ -381,6 +389,23 @@ const DiamondBuilder: React.FC = () => {
                           label={color}
                           isSelected={formData.color === color}
                           onClick={() => handleOptionClick("color", color)}
+                        />
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Clarity Selection */}
+                  <div>
+                    <label className="block text-xs uppercase text-[#445158] mb-3">
+                      Clarity
+                    </label>
+                    <div className="grid grid-cols-4 gap-2">
+                      {clarities.map((clarity) => (
+                        <Option
+                          key={clarity}
+                          label={clarity}
+                          isSelected={formData.clarity === clarity}
+                          onClick={() => handleOptionClick("clarity", clarity)}
                         />
                       ))}
                     </div>
