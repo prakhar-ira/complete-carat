@@ -1,10 +1,10 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
+
 import Image from "next/image";
 import Modal from "./Modal";
 import emailjs from "@emailjs/browser";
-import Script from "next/script";
 
 interface FormSectionProps {
   number: number;
@@ -182,10 +182,6 @@ const DiamondBuilder: React.FC<DiamondBuilderProps> = ({ onClose }) => {
 
     // Auto-expand section 2 when name and email are valid
     if ((name === 'name' || name === 'email') && !isSection2Expanded) {
-      const updatedFormData = {
-        ...formData,
-        [name]: value,
-      };
       
       const hasName = name === 'name' ? value.trim() !== '' : formData.name.trim() !== '';
       const hasEmail = name === 'email' ? value.trim() !== '' : formData.email.trim() !== '';
@@ -230,13 +226,6 @@ const DiamondBuilder: React.FC<DiamondBuilderProps> = ({ onClose }) => {
 
   const isValidEmail = (email: string) => {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-  };
-
-  // Check if user has entered valid name and email to show the second section
-  const canExpandSection2 = () => {
-    return formData.name.trim() !== "" && 
-           formData.email.trim() !== "" && 
-           isValidEmail(formData.email);
   };
 
   const toggleSection2 = () => {
