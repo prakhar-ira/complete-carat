@@ -1,5 +1,7 @@
-import { redirect } from "next/navigation";
+"use client";
+
+import CustomDiamonds from "./custom-diamonds/page";
 
 export default function Home() {
-  redirect("/custom-diamonds");
+  return <CustomDiamonds />;
 }

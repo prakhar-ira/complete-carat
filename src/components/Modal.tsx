@@ -18,7 +18,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, onProceed }) => {
       />
 
       {/* Modal Content */}
-      <div className="relative bg-white rounded-lg p-8 max-w-md w-full mx-4 shadow-xl">
+      <div className="relative bg-white rounded-lg p-8 max-w-md w-full mx-4 shadow-xl">8
         <div className="text-center">
           {/* Success Icon */}
           <div className="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-green-100 mb-4">
