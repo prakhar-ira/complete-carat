@@ -588,7 +588,7 @@ const Hero: React.FC = () => {
               </div>
               <div className="text-center px-1 w-auto max-w-[75%] sm:max-w-[65%] md:max-w-[80%] lg:max-w-[60%] xl:max-w-[50%] overflow-visible">
                 <h1 className="text-[26px] sm:text-[32px] md:text-[38px] lg:text-[48px] font-['SF_Pro_Display'] font-thin text-center uppercase tracking-wide bg-gradient-to-r from-white to-[#FDF0D5] text-transparent bg-clip-text [text-shadow:_-4.8px_-1.6px_12.8px_#E7CDB9,_4.8px_1.6px_12.8px_#FDF0D580] leading-tight sm:leading-tight md:whitespace-nowrap">
-                  DESIGN YOUR PERFECT DIAMOND
+                  DESIGN YOUR FINE JEWELRY
                 </h1>
               </div>
               <div className="w-[10px] h-[10px] sm:w-[14px] sm:h-[14px] flex items-center justify-center flex-shrink-0">

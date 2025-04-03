@@ -116,7 +116,7 @@ const Footer: React.FC = () => {
               </div>
               <p className="text-white text-base font-normal leading-relaxed mt-4 w-full max-w-xl mx-auto drop-shadow-[0px_10px_10px_0px_rgba(0,0,0,0.04)] [text-shadow:_0_0_2px_#FDF0D5]">
                 Every handcrafted diamond ring includes a lifetime craftsmanship
-                warranty and certified diamond authenticity documentation. GIA
+                warranty and certified diamond authenticity documentation. GIA/IGI
                 certification ensures lasting value and investment-grade diamond
                 quality for generations.
               </p>
