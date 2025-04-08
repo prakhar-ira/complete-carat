@@ -27,8 +27,10 @@ const FormSection: React.FC<FormSectionProps> = ({
 }) => {
   return (
     <div className="border border-[#E3ECF0] rounded-xl p-3">
-      <div 
-        className={`flex justify-between items-center ${canExpand ? 'cursor-pointer' : ''} ${isExpanded ? 'mb-4' : 'my-2'}`}
+      <div
+        className={`flex justify-between items-center ${
+          canExpand ? "cursor-pointer" : ""
+        } ${isExpanded ? "mb-4" : "my-2"}`}
         onClick={canExpand ? onToggle : undefined}
       >
         <div className="flex items-center">
@@ -38,7 +40,11 @@ const FormSection: React.FC<FormSectionProps> = ({
           <h3 className="text-[#536878] font-light uppercase">{title}</h3>
         </div>
         {showChevron && (
-          <div className={`text-[#01648E] transform transition-transform duration-300 ${isExpanded ? 'rotate-180' : ''}`}>
+          <div
+            className={`text-[#01648E] transform transition-transform duration-300 ${
+              isExpanded ? "rotate-180" : ""
+            }`}
+          >
             <svg
               className="w-6 h-6"
               fill="none"
@@ -57,9 +63,9 @@ const FormSection: React.FC<FormSectionProps> = ({
         )}
       </div>
       {/* Content with collapsible animation */}
-      <div 
+      <div
         className={`transition-all duration-300 overflow-hidden ${
-          isExpanded ? 'max-h-[1000px] opacity-100' : 'max-h-0 opacity-0'
+          isExpanded ? "max-h-[1000px] opacity-100" : "max-h-0 opacity-0"
         }`}
       >
         {children}
@@ -170,6 +176,7 @@ const DiamondBuilder: React.FC<DiamondBuilderProps> = ({ onClose }) => {
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isSection2Expanded, setIsSection2Expanded] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -181,12 +188,16 @@ const DiamondBuilder: React.FC<DiamondBuilderProps> = ({ onClose }) => {
     }));
 
     // Auto-expand section 2 when name and email are valid
-    if ((name === 'name' || name === 'email') && !isSection2Expanded) {
-      
-      const hasName = name === 'name' ? value.trim() !== '' : formData.name.trim() !== '';
-      const hasEmail = name === 'email' ? value.trim() !== '' : formData.email.trim() !== '';
-      const validEmail = name === 'email' ? /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value) : isValidEmail(formData.email);
-      
+    if ((name === "name" || name === "email") && !isSection2Expanded) {
+      const hasName =
+        name === "name" ? value.trim() !== "" : formData.name.trim() !== "";
+      const hasEmail =
+        name === "email" ? value.trim() !== "" : formData.email.trim() !== "";
+      const validEmail =
+        name === "email"
+          ? /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)
+          : isValidEmail(formData.email);
+
       if (hasName && hasEmail && validEmail) {
         setIsSection2Expanded(true);
       }
@@ -196,29 +207,29 @@ const DiamondBuilder: React.FC<DiamondBuilderProps> = ({ onClose }) => {
   const handleOptionClick = (field: string, value: string) => {
     setFormData((prev) => {
       // For fields that support multi-select (shape, color, clarity)
-      if (field === 'shape' || field === 'color' || field === 'clarity') {
+      if (field === "shape" || field === "color" || field === "clarity") {
         const currentValues = prev[field] as string[];
-        
+
         // If value is already selected, remove it
         if (currentValues.includes(value)) {
           return {
             ...prev,
-            [field]: currentValues.filter(item => item !== value)
+            [field]: currentValues.filter((item) => item !== value),
           };
-        } 
+        }
         // Otherwise, add it to the array
         else {
           return {
             ...prev,
-            [field]: [...currentValues, value]
+            [field]: [...currentValues, value],
           };
         }
-      } 
+      }
       // For single-select fields (like carat)
       else {
         return {
           ...prev,
-          [field]: value
+          [field]: value,
         };
       }
     });
@@ -257,43 +268,57 @@ const DiamondBuilder: React.FC<DiamondBuilderProps> = ({ onClose }) => {
   const structuredDataJson = {
     "@context": "https://schema.org",
     "@type": "Product",
-    "name": "Custom Diamond Engagement Ring",
-    "description": "Design your perfect engagement ring - select diamond carat weight, color, shape, and clarity with our interactive diamond builder.",
-    "offers": {
+    name: "Custom Diamond Engagement Ring",
+    description:
+      "Design your perfect engagement ring - select diamond carat weight, color, shape, and clarity with our interactive diamond builder.",
+    offers: {
       "@type": "AggregateOffer",
-      "priceCurrency": "USD",
-      "availability": "https://schema.org/InStock"
+      priceCurrency: "USD",
+      availability: "https://schema.org/InStock",
     },
-    "additionalProperty": [
+    additionalProperty: [
       {
         "@type": "PropertyValue",
-        "name": "Diamond Shapes",
-        "value": shapes.join(", ")
+        name: "Diamond Shapes",
+        value: shapes.join(", "),
       },
       {
         "@type": "PropertyValue",
-        "name": "Diamond Colors",
-        "value": colors.join(", ") 
+        name: "Diamond Colors",
+        value: colors.join(", "),
       },
       {
         "@type": "PropertyValue",
-        "name": "Diamond Clarities",
-        "value": clarities.join(", ")
-      }
-    ]
+        name: "Diamond Clarities",
+        value: clarities.join(", "),
+      },
+    ],
   };
 
   const handleSubmit = async () => {
+    // Prevent double submission
+    if (isSubmitting) return;
+
     if (isFormValid()) {
+      setIsSubmitting(true);
       try {
         const templateParams = {
           from_name: formData.name,
           from_email: formData.email,
           phone: formData.phone || "Not provided",
-          shape: formData.shape.length > 0 ? formData.shape.join(", ") : "Not specified",
+          shape:
+            formData.shape.length > 0
+              ? formData.shape.join(", ")
+              : "Not specified",
           carat: formData.carat,
-          color: formData.color.length > 0 ? formData.color.join(", ") : "Not specified",
-          clarity: formData.clarity.length > 0 ? formData.clarity.join(", ") : "Not specified",
+          color:
+            formData.color.length > 0
+              ? formData.color.join(", ")
+              : "Not specified",
+          clarity:
+            formData.clarity.length > 0
+              ? formData.clarity.join(", ")
+              : "Not specified",
           message: formData.additionalComments || "None",
         };
 
@@ -309,6 +334,8 @@ const DiamondBuilder: React.FC<DiamondBuilderProps> = ({ onClose }) => {
       } catch (error) {
         console.error("Error:", error);
         alert("Failed to send form data. Please try again.");
+      } finally {
+        setIsSubmitting(false);
       }
     }
   };
@@ -320,37 +347,52 @@ const DiamondBuilder: React.FC<DiamondBuilderProps> = ({ onClose }) => {
   // Using useEffect to add structured data to the DOM
   useEffect(() => {
     // Create script element
-    const script = document.createElement('script');
-    script.type = 'application/ld+json';
+    const script = document.createElement("script");
+    script.type = "application/ld+json";
     script.text = JSON.stringify(structuredDataJson);
-    script.id = 'diamond-builder-structured-data';
-    
+    script.id = "diamond-builder-structured-data";
+
     // Add to head
     document.head.appendChild(script);
-    
+
     // Cleanup on unmount
     return () => {
-      const existingScript = document.getElementById('diamond-builder-structured-data');
+      const existingScript = document.getElementById(
+        "diamond-builder-structured-data"
+      );
       if (existingScript) {
         document.head.removeChild(existingScript);
       }
     };
-  }, []);  // Empty dependency array as structuredData doesn't change
+  }, []); // Empty dependency array as structuredData doesn't change
 
   return (
     // Full screen fixed container with overlay - set to 90vh height
     <div className="fixed inset-0 z-50 bg-black/60 flex items-center justify-center">
       {/* Content container with fixed height and structure */}
       <div className="relative bg-white shadow-md rounded-sm w-full max-w-5xl mx-auto h-[90vh] flex flex-col overflow-hidden">
-         {/* Add Close Button */}
-         <button
-           onClick={onClose}
-           className="absolute top-2 right-2 text-gray-400 hover:text-gray-600 z-10"
-           aria-label="Close"
-         >
-           <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /></svg>
-         </button>
-        
+        {/* Add Close Button */}
+        <button
+          onClick={onClose}
+          className="absolute top-2 right-2 text-gray-400 hover:text-gray-600 z-10"
+          aria-label="Close"
+        >
+          <svg
+            className="w-6 h-6"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M6 18L18 6M6 6l12 12"
+            />
+          </svg>
+        </button>
+
         {/* Header */}
         <div className="flex flex-col items-center p-4 sm:p-6">
           <div className="mb-2 sm:mb-3">
@@ -396,8 +438,8 @@ const DiamondBuilder: React.FC<DiamondBuilderProps> = ({ onClose }) => {
         <div className="flex-grow overflow-y-auto px-4 sm:px-6 md:px-8 pb-4 sm:pb-6">
           <div className="space-y-4 sm:space-y-6">
             {/* Section 1 - Personal Information */}
-            <FormSection 
-              number={1} 
+            <FormSection
+              number={1}
               title="Tell us about yourself"
               showChevron={false}
             >
@@ -436,8 +478,8 @@ const DiamondBuilder: React.FC<DiamondBuilderProps> = ({ onClose }) => {
             </FormSection>
 
             {/* Section 2 - Diamond Preferences - Acts as an accordion */}
-            <FormSection 
-              number={2} 
+            <FormSection
+              number={2}
               title="What are you looking for?"
               isExpanded={isSection2Expanded}
               canExpand={true}
@@ -472,7 +514,9 @@ const DiamondBuilder: React.FC<DiamondBuilderProps> = ({ onClose }) => {
                       <span className="text-xs sm:text-sm text-[#536878]">
                         {formData.carat} Carat
                       </span>
-                      <span className="text-xs sm:text-sm text-[#536878]">10 Carat</span>
+                      <span className="text-xs sm:text-sm text-[#536878]">
+                        10 Carat
+                      </span>
                     </div>
                     <input
                       type="range"
@@ -547,19 +591,21 @@ const DiamondBuilder: React.FC<DiamondBuilderProps> = ({ onClose }) => {
           </p>
           <button
             onClick={handleSubmit}
-            disabled={!isFormValid()}
+            disabled={!isFormValid() || isSubmitting}
             className={`w-full p-3 sm:p-4 rounded-lg text-center transition-all duration-200 ${
-              isFormValid()
+              isFormValid() && !isSubmitting
                 ? "bg-[#01648E] hover:bg-[#01648E]/90 cursor-pointer"
                 : "bg-[#e2e8f0] cursor-not-allowed"
             }`}
           >
             <span
               className={`text-sm sm:text-base font-regular ${
-                isFormValid() ? "text-[#FDF0D5]" : "text-[#94a3b8]"
+                isFormValid() && !isSubmitting
+                  ? "text-[#FDF0D5]"
+                  : "text-[#94a3b8]"
               }`}
             >
-              BOOK CONSULTATION
+              {isSubmitting ? "SUBMITTING..." : "BOOK CONSULTATION"}
             </span>
           </button>
         </div>

@@ -536,7 +536,6 @@ const Hero: React.FC = () => {
     openDiamondBuilder();
   };
 
-  console.log(isMobile, "isMobile");
   return (
     <div
       ref={containerRef}
