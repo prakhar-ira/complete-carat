@@ -254,7 +254,7 @@ const ReturnPolicyModal = ({ onClose }: { onClose: () => void }) => {
               <p className="text-base sm:text-md md:text-md whitespace-pre-line">
                 At Complete Carat, we believe that your satisfaction goes beyond
                 the purchase. We&apos;re dedicated to making sure you feel
-                confident and happy with your jewellery every step of the way.
+                confident and happy with your jewelry every step of the way.
                 If for any reason you&apos;re not completely satisfied, we offer
                 a 10-Day Money-Back Guarantee. You can return or exchange any
                 items within 10 days of delivery, with no hassle and at no cost
